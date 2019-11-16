@@ -1,0 +1,28 @@
+{% extends "./basictemplate.html" %}
+{% block title %}TP Metodologia 3{% endblock %}
+{% block content %}
+
+<br><br><br><br>
+<main class="login-form">
+    <div class="cotainer">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Registro</div>
+                    <div class="card-body" style="text-align: center">
+                        <form method="POST">
+                            {{ form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<br><br><br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "./basictemplate.html" %}
+{% block title %}TP Metodologia 3{% endblock %}
+{% block content %}
+
+
+<br><br><br><br>
+
+<!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-9">
+      <div class="card mt-4" style="width: 100%;float: left;margin: 2px;">
+        {% if property.image %}
+        <img class="card-img-top img-fluid" src="{{ property.image.url }}" alt="">
+        {% endif %}
+        <div class="card-body">
+          <h3 class="card-title">{{ property.name }}</h3>
+          <h4>${{ property.price }}</h4>
+          <p class="card-text">{{ property.description }}</p>
+          <p class="card-text">Capacidad: {{ property.capacity }}</p>
+          <p class="card-text">Propietario: {{ property.owner.first_name}} {{ property.owner.last_name }}</p>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <div class="col-lg-3" style="float: right;">
+      <div class="list-group border"
+        style="text-align: center;border: black;margin: 10px; margin-top: 25px; border-radius: 2px;">
+        <h3 class="card-title">Reservar:</h3>
+        {% if dates %}
+        {% if request.user.is_authenticated == False%}
+        <a class="btn btn-primary" href="/login">Iniciar sesion para reservar!</a> <!--cambiar-->
+        {% else %}
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <ul>
+              {% for date in dates %}
+              <label><input type="checkbox" name="dates" value="{{date}}">{{ date.date }}</label>
+              {% endfor %}
+            </ul>
+            <label for="cap">Huespedes</label><select class="form-control" name="" id="cap">
+
+              {% for value in capacity %}
+              <option value="{{ value }}">{{ value }}</option>
+              {% endfor %}
+
+            </select><br>
+            <div style="text-align: left">
+            </div>
+
+
+          </div>
+          <button type="submit" class="btn btn-success">Reservar</button>
+        </form>
+        {% endif %}
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+<!-- /.container -->
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "./basictemplate.html" %}
+{% block title %}TP Metodologia 3{% endblock %}
+{% block content %}
+
+<br><br><br><br>
+
+<br>
+<br>
+<div class="container" style="align-items: center;">
+  <h2>
+    Mis Reservas:
+  </h2>
+  <table class="table" style="border-radius: 2px;">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Propiedad</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Detalle</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for reservation in reservations %}
+      {% if reservation.user.username == request.user.username %}
+      <tr>
+        <th scope="row">{{reservation.reservationCode}}</th>
+        <td>{{ reservation.property.name }}</td>
+        <td>${{ reservation.total }}</td>
+        <td><a class="btn btn-success" href="/reservation_detail/{{ reservation.id }}">Detalles</a></td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <br>
+</div>
+<br><br><br>
+
+
+{% endblock %}
